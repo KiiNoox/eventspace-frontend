@@ -1,0 +1,18 @@
+{
+  "name": "eventspaceai-frontend",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "react-konva": "18.0.4",
+    "konva": "8.4.3",
+    "papaparse": "5.4.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test"
+  }
+}

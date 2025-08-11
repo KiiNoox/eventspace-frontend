@@ -1,0 +1,10 @@
+import React, { useState } from 'react';
+import { Stage, Layer, Rect, Text } from 'react-konva';
+import Papa from 'papaparse';
+const seatSize = 60; const rows = 5; const cols = 8;
+const categoriesColors = { VIP: 'gold', Officers: 'lightblue', General: 'lightgray' };
+export default function App(){ const [guests,setGuests]=useState([]); const [seats,setSeats]=useState(Array.from({length:rows*cols},()=>({guest:null,checkedIn:false})));
+const handleFileUpload=(e)=>{ const file=e.target.files[0]; if(!file) return; Papa.parse(file,{header:true,complete:(results)=>{ const data=results.data.filter(g=>g.Name); setGuests(data); }}); };
+const assignGuestToSeat=(seatIndex)=>{ const availableGuest=guests.find(g=>!seats.some(s=>s.guest?.Name===g.Name)); if(!availableGuest) return; const newSeats=[...seats]; newSeats[seatIndex].guest=availableGuest; setSeats(newSeats); };
+const toggleCheckIn=(seatIndex)=>{ const newSeats=[...seats]; newSeats[seatIndex].checkedIn=!newSeats[seatIndex].checkedIn; setSeats(newSeats); };
+return (<div style={{padding:20}}><h1>Event Space AI - Demo</h1><input type='file' accept='.csv' onChange={handleFileUpload} /><div style={{display:'flex',gap:20}}><Stage width={cols*seatSize} height={rows*seatSize}><Layer>{seats.map((seat,i)=>{ const x=(i%cols)*seatSize; const y=Math.floor(i/cols)*seatSize; const color=seat.guest? categoriesColors[seat.guest.Category] || 'white':'white'; const border=seat.checkedIn?'green':'black'; return (<React.Fragment key={i}><Rect x={x} y={y} width={seatSize-4} height={seatSize-4} fill={color} stroke={border} strokeWidth={2} onClick={()=>{ seat.guest? toggleCheckIn(i) : assignGuestToSeat(i); }} /><Text x={x+4} y={y+22} text={seat.guest? seat.guest.Name : `Seat ${i+1}`} fontSize={12} /></React.Fragment>); })}</Layer></Stage><div><h3>Guests</h3><ul>{guests.map((g,idx)=>(<li key={idx}>{g.Name} ({g.Category})</li>))}</ul></div></div></div>); }
