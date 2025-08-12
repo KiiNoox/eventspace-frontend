@@ -1,18 +1,21 @@
 {
-  "name": "eventspaceai-frontend",
+  "name": "eventspace-frontend-demo",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
-    "react-konva": "^18.2.10",
-    "konva": "8.4.3",
-    "papaparse": "5.4.1"
+    "@mui/material": "5.14.11",
+    "@emotion/react": "11.11.1",
+    "@emotion/styled": "11.11.0",
+    "react-konva": "18.2.10",
+    "konva": "9.3.6",
+    "papaparse": "5.4.1",
+    "qrcode.react": "1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test"
+    "build": "react-scripts build"
   }
 }
